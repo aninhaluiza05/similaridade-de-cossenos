@@ -1,0 +1,51 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov  4 20:08:59 2025
+
+@author: anabi
+"""
+
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+
+df = pd.read_csv("dataset_musicas.csv")
+
+
+musicas_escolhidas = df[df["Musica"].isin([
+    "we can’t be friends (wait for your love)",
+    "Someone Like You",
+    "Fine Line",
+    "Back in Black",
+    "Sue Me"
+])]
+
+
+vetorizador = TfidfVectorizer(stop_words='english')
+tfidf = vetorizador.fit_transform(musicas_escolhidas["Letra"])
+
+
+similaridade = cosine_similarity(tfidf)
+
+
+tabela_similaridade = pd.DataFrame(
+    similaridade,
+    index=musicas_escolhidas["Musica"],
+    columns=musicas_escolhidas["Musica"]
+)
+
+print("=== Similaridade de Cosseno entre as músicas ===\n")
+print(tabela_similaridade)
+
+
+print("\n=== Análise ===")
+print("A similaridade de cosseno mede o quanto as letras das músicas são parecidas, com valores entre 0 e 1.")
+print("Quanto mais próximo de 1, mais semelhantes são as palavras e temas presentes nas letras.\n")
+
+print("- 'we can’t be friends (wait for your love)' e 'Someone Like You' apresentam alta similaridade, pois ambas falam sobre amor e saudade.")
+print("- 'Fine Line' tem relação moderada com essas duas, já que também aborda sentimentos e superação.")
+print("- 'Back in Black' apresenta baixa similaridade, pois pertence ao rock e fala de energia e renascimento.")
+print("- 'Sue Me' mostra uma similaridade média, por tratar de autoestima e confiança dentro do pop.")
+
