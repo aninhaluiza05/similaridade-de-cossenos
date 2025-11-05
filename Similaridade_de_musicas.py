@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  4 20:08:59 2025
-
-@author: anabi
-"""
-
-
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -48,4 +40,5 @@ print("- 'we can’t be friends (wait for your love)' e 'Someone Like You' apres
 print("- 'Fine Line' tem relação moderada com essas duas, já que também aborda sentimentos e superação.")
 print("- 'Back in Black' apresenta baixa similaridade, pois pertence ao rock e fala de energia e renascimento.")
 print("- 'Sue Me' mostra uma similaridade média, por tratar de autoestima e confiança dentro do pop.")
+
 
